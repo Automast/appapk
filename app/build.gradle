@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.remutx.youtube'
+    namespace 'com.remutx.tiktok'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.remutx.youtube"
+        applicationId "com.remutx.tiktok"
         minSdk 21
         targetSdk 34
         versionCode 1
