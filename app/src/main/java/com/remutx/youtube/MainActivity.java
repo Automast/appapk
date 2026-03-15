@@ -3,9 +3,7 @@ package com.remutx.youtube;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -22,25 +20,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Full screen — no title bar, no status bar
+        // Only hide the app title bar — status bar & nav buttons stay visible
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
 
         webView = new WebView(this);
         setContentView(webView);
-
-        // Hide system UI for true full-screen immersive mode
-        webView.setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_FULLSCREEN |
-            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -54,7 +38,6 @@ public class MainActivity extends Activity {
         settings.setAllowContentAccess(true);
         settings.setSupportZoom(false);
 
-        // Keep all navigation inside the WebView
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
