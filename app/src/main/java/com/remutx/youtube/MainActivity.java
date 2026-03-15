@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends Activity {
 
     private WebView webView;
-    private static final String TARGET_URL = "https://remutx.netlify.app/youtube";
+    private static final String TARGET_URL = "http://remutx.netlify.app/tiktok";
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
