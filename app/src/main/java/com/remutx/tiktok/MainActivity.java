@@ -11,8 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-// REPLACE "com.yourname.newapp" WITH YOUR ACTUAL NAMESPACE FROM build.gradle
-import com.iprolist.deepscan.R; 
+// Notice we deleted the 'import com.yourname.newapp.R' line. We don't need it anymore!
 
 public class MainActivity extends Activity {
 
@@ -24,8 +23,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.activity_main); 
-        webView = findViewById(R.id.webview); 
+        // THE MAGIC FIX: Create the WebView dynamically in code.
+        // This bypasses XML layouts completely so the build won't crash.
+        webView = new WebView(this);
+        setContentView(webView);
         
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -56,7 +57,7 @@ public class MainActivity extends Activity {
         });
 
         // REPLACE THIS WITH YOUR ACTUAL WEBSITE URL
-        webView.loadUrl("https://yourwebsite.com"); 
+        webView.loadUrl("https://videogen24.netlify.app"); 
     }
 
     @Override
