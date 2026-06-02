@@ -1,5 +1,6 @@
-package com.remutx.tiktok; // Keep this exactly as it is!
+package com.remutx.tiktok;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,9 +10,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+// REPLACE "com.yourname.newapp" WITH YOUR ACTUAL NAMESPACE FROM build.gradle
+import com.yourname.newapp.R; 
+
+public class MainActivity extends Activity {
 
     private WebView webView;
     public ValueCallback<Uri[]> uploadMessage;
@@ -21,10 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Ensure this matches your layout name in the res/layout folder
         setContentView(R.layout.activity_main); 
-
-        // Ensure this matches your WebView ID in your layout XML
         webView = findViewById(R.id.webview); 
         
         WebSettings webSettings = webView.getSettings();
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         webView.setWebViewClient(new WebViewClient());
 
-        // This WebChromeClient is the magic that allows file uploads to work
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onShowFileChooser(WebView mWebView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 uploadMessage = filePathCallback;
                 
-                // This creates the intent to open the phone's file picker
                 Intent intent = fileChooserParams.createIntent();
                 try {
                     startActivityForResult(intent, REQUEST_SELECT_FILE);
@@ -61,13 +59,11 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl("https://yourwebsite.com"); 
     }
 
-    // This method catches the file after the user picks it and sends it back to the WebView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_SELECT_FILE) {
             if (uploadMessage == null) return;
             
-            // This safely parses the selected file URI and passes it to the website
             uploadMessage.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, intent));
             uploadMessage = null;
         } else {
@@ -75,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     
-    // This ensures that if the user presses the physical back button, 
-    // it goes back a page on your website instead of instantly closing the app.
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
