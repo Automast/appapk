@@ -12,7 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 // REPLACE "com.yourname.newapp" WITH YOUR ACTUAL NAMESPACE FROM build.gradle
-import com.yourname.newapp.R; 
+import com.iprolist.deepscan.R; 
 
 public class MainActivity extends Activity {
 
