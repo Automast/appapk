@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.remutx.tiktok'
+    namespace 'com.iprolist.deepscan'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.remutx.tiktok"
+        applicationId "com.iprolist.deepscan"
         minSdk 21
         targetSdk 34
         versionCode 1
